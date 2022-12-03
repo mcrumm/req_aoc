@@ -2,18 +2,24 @@
 
 <!-- MDOC -->
 
-Elixir Req plugin to download Advent of Code input.
+Elixir Req plugin to download [Advent of Code](https://adventofcode.com) input.
 
 ## Usage
 
-Use the `ReqAOC.fetch!/1` convenience function:
+The easiest way to use Req is with `Mix.install/2` (requires Elixir v1.12+):
 
 ```elixir
+Mix.install([
+  {:req_aoc, github: "mcrumm/req_aoc", ref: "28e3813"}
+])
+
 ReqAOC.fetch!({2022, 01, "my-session-id-from-dev-tools"})
 # ==> "..."
 ```
 
-...or attach ReqAOC to an existing `Req.Request`:
+If you want to use ReqAOC in a Mix project, you can add the above dependency to your `mix.exs`.
+
+You can also attach ReqAOC to an existing `Req.Request`:
 
 ```elixir
 Req.new()
@@ -23,20 +29,3 @@ Req.new()
 ```
 
 <!-- MDOC -->
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `req_aoc` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:req_aoc, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/req_aoc>.
