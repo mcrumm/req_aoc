@@ -39,7 +39,8 @@ defmodule ReqAOC.MixProject do
       source_ref: "v#{@version}",
       language: "en",
       formatters: ["html"],
-      main: "ReqAOC"
+      main: "usage",
+      extras: ["guides/usage.livemd"]
     ]
   end
 end

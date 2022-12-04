@@ -1,0 +1,17 @@
+# ReqAOC Usage Guide
+
+```elixir
+Mix.install([
+  {:req_aoc, github: "mcrumm/req_aoc"}
+])
+```
+
+## Input
+
+This guide provides a starting point for downloading [Advent of Code](https://adventofcode.com/) data in Livebook. The first step is to configure `AOC_SESSION` in your **app secrets**, which requires Livebook v0.7+. Run the following block and click 'Add Secret' when prompted:
+
+```elixir
+input =
+  System.fetch_env!("LB_AOC_SESSION")
+  |> ReqAOC.fetch!({2022, 01}, max_retries: 0)
+```

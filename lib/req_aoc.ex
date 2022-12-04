@@ -5,25 +5,40 @@ defmodule ReqAOC do
              |> String.split("<!-- MDOC -->")
              |> Enum.fetch!(1)
 
+  @deprecated "Use fetch!/2 instead"
+  @spec fetch!({year :: integer(), day :: integer(), session :: String.t()}) :: String.t()
+  def fetch!({year, day, session}) do
+    fetch!(session, {year, day}, [])
+  end
+
+  @doc """
+  Refer to `fetch!/3`.
+  """
+  def fetch!({year, day, session}, options) do
+    fetch!(session, {year, day}, options)
+  end
+
   @doc """
   Fetches Advent of Code input.
 
   ## Examples
 
-      ReqAOC.fetch!({2022, 01, "my-session-id-from-dev-tools"})
+      ReqAOC.fetch!("my-session-id", {2022, 01})
+      #=> "..."
 
-      ReqAOC.fetch!({2022, 01, "my-session-id"}, max_retries: 0)
+      ReqAOC.fetch!("my-session-id", {2022, 01}, max_retries: 0)
+      #=> "..."
   """
   @spec fetch!(
-          {year :: integer(), day :: integer(), session :: String.t()},
+          session :: String.t(),
+          {year :: integer(), day :: integer()},
           options :: Keyword.t()
-        ) ::
-          String.t()
-  def fetch!({year, day, session} = aoc, options \\ [])
-      when is_integer(year) and is_integer(day) and is_binary(session) do
+        ) :: String.t()
+  def fetch!(session, {year, day}, options)
+      when is_binary(session) and is_integer(year) and is_integer(day) and is_list(options) do
     Req.new()
     |> ReqAOC.attach()
-    |> Req.get!([aoc: aoc] ++ options)
+    |> Req.get!([aoc: {year, day, session}] ++ options)
     |> Map.fetch!(:body)
   end
 
@@ -34,15 +49,22 @@ defmodule ReqAOC do
 
     * `:aoc` - A tuple `{year, day, session}`.
 
+  ## Examples
+
+      req = Req.new() |> ReqAOC.attach()
+      req |> Req.get!(aoc: {2022, 01, "my-session-id"})
+      #=> %Req.Response{body: "..."}
+
   """
   def attach(%Req.Request{} = request, options \\ []) do
     request
     |> Req.Request.register_options([:aoc])
     |> Req.Request.merge_options(options)
-    |> Req.Request.append_request_steps(aoc: &build_aoc_url/1)
+    |> Req.Request.append_request_steps(aoc: &__MODULE__.put_aoc/1)
   end
 
-  defp build_aoc_url(req) do
+  @doc false
+  def put_aoc(req) do
     if req.options[:aoc] do
       case req.options.aoc do
         {year, day, session} when is_integer(year) and is_integer(day) and is_binary(session) ->
@@ -51,7 +73,9 @@ defmodule ReqAOC do
           |> Req.Request.put_header("cookie", ~s<session=#{session}>)
 
         other ->
-          raise ArgumentError, "expected a tuple {Year, Day, Session}, got: #{inspect(other)}"
+          raise ArgumentError,
+                "invalid options given to ReqAOC" <>
+                  ", expected a tuple {Year, Day, Session}, got: #{inspect(other)}"
       end
     else
       req
