@@ -12,7 +12,7 @@ The easiest way to use Req is with `Mix.install/2` (requires Elixir v1.12+):
 
 ```elixir
 Mix.install([
-  {:req_aoc, github: "mcrumm/req_aoc"}
+  {:req_aoc, github: "mcrumm/req_aoc", ref: "eef58c9"}
 ])
 
 System.fetch_env!("AOC_SESSION") |> ReqAOC.fetch!({2022, 01})
