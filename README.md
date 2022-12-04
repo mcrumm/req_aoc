@@ -1,10 +1,12 @@
 # ReqAOC
 
+https://user-images.githubusercontent.com/168677/205474609-778654e1-cdf2-4812-b567-bda456717800.mov
+
 <!-- MDOC -->
 
-[![CI](https://github.com/mcrumm/req_aoc/actions/workflows/ci.yml/badge.svg)](https://github.com/mcrumm/req_aoc/actions/workflows/ci.yml)
-
 Elixir Req plugin to download [Advent of Code][aoc] input.
+
+[![CI](https://github.com/mcrumm/req_aoc/actions/workflows/ci.yml/badge.svg)](https://github.com/mcrumm/req_aoc/actions/workflows/ci.yml)
 
 ## Usage
 

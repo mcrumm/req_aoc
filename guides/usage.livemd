@@ -15,3 +15,13 @@ input =
   System.fetch_env!("LB_AOC_SESSION")
   |> ReqAOC.fetch!({2022, 01}, max_retries: 0)
 ```
+## How to get your session cookie
+
+Puzzle inputs differ by user. For this reason, you can't get your data with an unauthenticated request. Here's how to get your session cookie for ReqAOC to use:
+
+* Log in on [Advent of Code](https://adventofcode.com/) via any available provider.
+* Open your browser's developer console (e.g. right click --> Inspect) and navigate to the Network tab.
+* GET any input page, for example https://adventofcode.com/2022/day/1/input, and search in the **request headers**.
+* It's a long hex string. You want the part that comes _after_ `Cookie: session=`. Save that to a system environment variable or a Livebook app secret called `AOC_SESSION`.
+
+[![Finding your session token](https://cloud.githubusercontent.com/assets/6615374/20862970/0922a4fe-b980-11e6-8f30-5967ca494f5e.png)](https://github.com/wimglenn/advent-of-code-wim/issues/1)
