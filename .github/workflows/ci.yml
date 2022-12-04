@@ -21,6 +21,7 @@ jobs:
               otp: 25
             lint: lint
             coverage: coverage
+            docs: docs
     steps:
       - uses: actions/checkout@v2
 
@@ -52,6 +53,11 @@ jobs:
 
       - run: mix test --cover
         if: ${{matrix.coverage}}
+
+      - run: mix docs
+        if: ${{matrix.docs}}
+        env:
+          MIX_ENV: docs
 
       - uses: actions/upload-artifact@v3
         with:
