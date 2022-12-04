@@ -2,6 +2,8 @@
 
 <!-- MDOC -->
 
+[![CI](https://github.com/mcrumm/req_aoc/actions/workflows/ci.yml/badge.svg)](https://github.com/mcrumm/req_aoc/actions/workflows/ci.yml)
+
 Elixir Req plugin to download [Advent of Code][aoc] input.
 
 ## Usage
