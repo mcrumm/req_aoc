@@ -14,8 +14,10 @@ defmodule ReqAOCTest do
   end
 
   test "fetch!/1 deprecated format" do
-    assert ReqAOC.fetch!({2022, 01, "session"}, plug: &check/1) ==
-             "https://adventofcode.com/2022/day/1/input|session"
+    assert ExUnit.CaptureIO.capture_io(:stderr, fn ->
+             assert ReqAOC.fetch!({2022, 01, "session"}, plug: &check/1) ==
+                      "https://adventofcode.com/2022/day/1/input|session"
+           end) =~ "fetch!/2 with a {Year, Day, Session} tuple is deprecated."
   end
 
   test "request fails with invalid options" do

@@ -15,7 +15,15 @@ defmodule ReqAOC do
   Refer to `fetch!/3`.
   """
   def fetch!({year, day, session}, options) do
+    IO.warn(
+      "fetch!/2 with a {Year, Day, Session} tuple is deprecated." <> " Use fetch!/3 instead."
+    )
+
     fetch!(session, {year, day}, options)
+  end
+
+  def fetch!(session, {year, day}) do
+    fetch!(session, {year, day}, [])
   end
 
   @doc """
