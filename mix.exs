@@ -15,7 +15,8 @@ defmodule ReqAOC.MixProject do
       docs: docs(),
       preferred_cli_env: [
         docs: :docs
-      ]
+      ],
+      test_coverage: [summary: [threshold: 80]]
     ]
   end
 
