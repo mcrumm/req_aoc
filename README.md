@@ -2,6 +2,8 @@
 
 https://user-images.githubusercontent.com/168677/205474609-778654e1-cdf2-4812-b567-bda456717800.mov
 
+[![Run in Livebook](https://livebook.dev/badge/v1/blue.svg)](https://livebook.dev/run?url=https://github.com/mcrumm/req_aoc/blob/main/guides/usage.livemd)
+
 <!-- MDOC -->
 
 Elixir Req plugin to download [Advent of Code][aoc] input.
@@ -14,7 +16,7 @@ The easiest way to use Req is with `Mix.install/2` (requires Elixir v1.12+):
 
 ```elixir
 Mix.install([
-  {:req_aoc, github: "mcrumm/req_aoc", ref: "eef58c9"}
+  {:req_aoc, github: "mcrumm/req_aoc", ref: "9f1371b"}
 ])
 
 System.fetch_env!("AOC_SESSION") |> ReqAOC.fetch!({2022, 01})

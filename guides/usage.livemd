@@ -2,7 +2,7 @@
 
 ```elixir
 Mix.install([
-  {:req_aoc, github: "mcrumm/req_aoc", ref: "eef58c9"}
+  {:req_aoc, github: "mcrumm/req_aoc", ref: "9f1371b"}
 ])
 ```
 
